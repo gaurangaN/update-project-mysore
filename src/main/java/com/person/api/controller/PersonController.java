@@ -1,11 +1,10 @@
 package com.person.api.controller;
 import java.time.LocalDate;
-
+import java.time.format.DateTimeFormatter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -48,14 +47,19 @@ public class PersonController {
 	}
 	
 	@RequestMapping(value="getPersonByDate/fromdate/{startDate}/toDate/{endDate}",method = RequestMethod.GET)
-	public ResponseEntity<Object> getPersonBetweenTwoDates(@PathVariable("startDate") LocalDate startDate,@PathVariable("endDate") LocalDate endDate)
+	public ResponseEntity<Object> getPersonBetweenTwoDates(@PathVariable("startDate") String startDate,@PathVariable("endDate") String endDate)
 	{
-		return new ResponseEntity<Object>(personService.findAllPerson(startDate, endDate), HttpStatus.OK);
+		DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyyMMdd");
+		LocalDate startDate1 = LocalDate.parse(startDate, format);
+		DateTimeFormatter format1 = DateTimeFormatter.ofPattern("yyyyMMdd");
+		LocalDate endDate1 = LocalDate.parse(endDate, format1);
+		return new ResponseEntity<Object>(personService.findAllPerson(startDate1, endDate1), HttpStatus.OK);
 	}
-	@RequestMapping(value="getPersonByDate",method = RequestMethod.POST)
+
+	/*@RequestMapping(value="getPersonByDate",method = RequestMethod.POST)
 	public ResponseEntity<Object> getPersonBetweenTwoDates(@RequestBody Person person)
 	{
 		return new ResponseEntity<Object>(personService.findAllPerson(person.getStartDate(), person.getEndDate()), HttpStatus.OK);
-	}
+	}*/
 	
 }
