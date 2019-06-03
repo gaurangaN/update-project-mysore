@@ -6,6 +6,8 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.MultiValueMap;
+
 import com.person.api.model.AddressPerson;
 import com.person.api.repository.AddressRepository;
 
@@ -33,5 +35,10 @@ public class AddressPersonService {
 
 	public List<AddressPerson> getAllAddress() {
 		return addressRepository.findAll();
+	}
+
+	public AddressPerson updateAddress(AddressPerson address) {
+		//addressRepository.deleteById(address.getAddressId());
+		return addressRepository.save(address);
 	}
 }

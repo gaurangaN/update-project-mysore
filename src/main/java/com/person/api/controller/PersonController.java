@@ -5,9 +5,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.person.api.model.AddressPerson;
 import com.person.api.model.Person;
 import com.person.api.service.AddressPersonService;
 import com.person.api.service.PersonService;
@@ -61,5 +64,32 @@ public class PersonController {
 	{
 		return new ResponseEntity<Object>(personService.findAllPerson(person.getStartDate(), person.getEndDate()), HttpStatus.OK);
 	}*/
+	
+	@RequestMapping(value="deletePersonById/{personId}",method = RequestMethod.DELETE)
+	public ResponseEntity<Object> deletePerson(@PathVariable int personId)
+	{
+		Person person1=personService.getPersonById(personId);
+		personService.getPersonById(personId);
+		if(person1.getPersonId()==null)	{
+			throw new RuntimeException("Person not found");
+		}
+		personService.deletePersonById(personId);
+		return new ResponseEntity<Object>(HttpStatus.OK);
+		
+	}
+	
+
+	@RequestMapping(value="updatePersonAddressbyId/{personId}",method = RequestMethod.PUT)
+	public ResponseEntity<Object> updatePerson(@RequestBody AddressPerson address,@PathVariable int personId )
+	{
+		if(personService.getPersonById(personId).getPersonId()==null && address.getAddressId()==null)
+		{
+			throw new RuntimeException("Person not found");
+		}
+		address.setPersonId(personId);
+		return new ResponseEntity<Object>(addressService.updateAddress(address),HttpStatus.OK);
+	}
+	
+	
 	
 }

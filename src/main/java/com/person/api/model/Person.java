@@ -30,7 +30,7 @@ public class Person {
 	private List<AddressPerson> addressList;
 	
 
-	public LocalDate getStartDate() {
+/*	public LocalDate getStartDate() {
 		return startDate;
 	}
 
@@ -48,7 +48,7 @@ public class Person {
 	public void setEndDate(LocalDate endDate) {
 		this.endDate = endDate;
 	}
-
+*/
 
 	public List<AddressPerson> getAddressList() {
 		return addressList;

@@ -32,13 +32,13 @@ public class AddressPerson {
 		this.personId = personId;
 	}
 
-/*	public Integer getPersonId() {
+	public Integer getPersonId() {
 		return personId;
 	}
 
 	public void setPersonId(Integer personId) {
 		this.personId = personId;
-	}*/
+	}
 
 	public AddressPerson() {
 		super();
@@ -52,14 +52,14 @@ public class AddressPerson {
 		this.createdDate = createdDate;
 	}
 
-/*	public Integer getAddressId() {
+	public Integer getAddressId() {
 		return addressId;
 	}
 
 	public void setAddressId(Integer addressId) {
 		this.addressId = addressId;
 	}
-*/
+
 	public String getLocation() {
 		return location;
 	}

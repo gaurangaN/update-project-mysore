@@ -8,6 +8,7 @@ import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.MultiValueMap;
 
 import com.person.api.model.AddressPerson;
 import com.person.api.model.Person;
@@ -37,13 +38,22 @@ public class PersonService {
 	}
 
 	public List<Person> findAllPerson() {
-
 		return personRepository.findAll();
 	}
-	
-	public List<Person> findAllPerson(LocalDate start,LocalDate end) {
+
+	public List<Person> findAllPerson(LocalDate start, LocalDate end) {
 
 		return personRepository.findByCreateddateBetween(start, end);
+	}
+
+	public void deletePersonById(int personId) {
+		personRepository.deleteById(personId);
+	}
+
+	public Person updatePerson(Person person) {
+		return personRepository.save(person);
+		
+		
 	}
 
 }
